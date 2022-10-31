@@ -1,0 +1,70 @@
+# This is a default template for a post-install scriptlet.
+# Uncomment only required functions and remove any functions
+# you don't need (and this header).
+
+## arg 1:  the new package version
+#pre_install() {
+	# do something here
+#}
+
+## arg 1:  the new package version
+post_install() {
+	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo     
+	systemd-hwdb update
+	udevadm trigger -v -p DEVNAME=/dev/iio:device0
+	sed -i -e '/GRUB_CMDLINE_LINUX_DEFAULT/d' /etc/default/grub
+	sed -i '/\GRUB_DISTRIBUTOR/a GRUB_CMDLINE_LINUX_DEFAULT="quiet splash mem_sleep_default=s2idle resume=/dev/$(/usr/share/juno/resume)"' /etc/default/grub
+	update-grub
+	systemctl enable thermald
+	systemctl enable irqbalance
+	systemctl enable powertop
+	systemctl enable sshd
+	systemctl start sshd
+	rm /usr/lib/systemd/system/systemd-suspend.service
+	ln -s /usr/lib/systemd/system/systemd-suspend-then-hibernate.service /usr/lib/systemd/system/systemd-suspend.service
+	rm /usr/share/alsa/ucm2/Intel/sof-essx8336/HiFi.conf
+	cp /usr/share/juno/HiFi.conf /usr/share/alsa/ucm2/Intel/sof-essx8336/HiFi.conf
+	updatedb
+}
+
+## arg 1:  the new package version
+## arg 2:  the old package version
+#pre_upgrade() {
+	# do something here
+#}
+
+## arg 1:  the new package version
+## arg 2:  the old package version
+#post_upgrade() {
+	# do something here
+#}
+
+## arg 1:  the old package version
+#post_remove() {
+	# do something here
+#}
+
+## arg 1:  the old package version
+pre_remove() {
+	rm /etc/udev/hwdb.d/61-sensor-local.hwdb
+	rm /etc/udev/rules.d/70-wifi-pm.rules
+	rm /etc/udev/rules.d/99-inverted-touchscreen.rules
+	rm /etc/udev/rules.d/power-profiles.rules
+	rm /etc/udev/rules.d/powertop.rules
+	rm /etc/udev/rules.d/external-display-power-profile.rules
+	rm /etc/udev/rules.d/squeekboard.rules
+	
+	rm /etc/systemd/logind.conf.d/juno-login.conf
+	rm /etc/systemd/sleep.conf.d/juno-sleep.conf
+	rm -R /usr/share/juno
+	rm /etc/pacman.d/hooks/systemd.hook
+	rm /etc/pacman.d/hooks/alsa-ucm-conf.hook
+	rm /etc/systemd/system/powertop.service
+	
+	rm /usr/bin/restore-alsa.sh
+	rm /etc/systemd/system/sound.service
+	rm /etc/systemd/system/sound-retry.service
+	
+	rm /etc/profile.d/juno-profile.sh
+		
+}

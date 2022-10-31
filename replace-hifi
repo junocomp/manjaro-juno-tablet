@@ -1,0 +1,5 @@
+#!/bin/bash
+
+rm /usr/share/alsa/ucm2/Intel/sof-essx8336/HiFi.conf;
+cp /usr/share/juno/HiFi.conf /usr/share/alsa/ucm2/Intel/sof-essx8336/HiFi.conf
+

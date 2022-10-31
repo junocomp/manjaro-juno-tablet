@@ -1,0 +1,3 @@
+#!/bin/sh
+
+lsblk | grep SWAP | awk '{print $1}' | tr -d └─

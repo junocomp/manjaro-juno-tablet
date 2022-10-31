@@ -1,0 +1,14 @@
+# /etc/pacman.d/hooks/alsa-ucm-conf.hook
+
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = alsa-ucm-conf
+
+[Action]
+Description = Replaces HiFi for es8336
+# Depends is optional if this should depend on another package
+#Depends =
+When = PostTransaction
+Exec = /usr/share/juno/replace-hifi
+
