@@ -5,7 +5,7 @@ pkgrel=1
 pkgdesc="Manjaro Drivers for Juno Tablet"
 arch=(any)
 license=('GPL3')
-depends=('flatpak' 'plocate' 'firefox' 'sof-firmware' 'thermald' 'irqbalance' 'curl' 'dkms' 'linux60-headers' 'sof-firmware')
+depends=('flatpak' 'plocate' 'firefox' 'sof-firmware' 'thermald' 'irqbalance' 'curl' 'dkms' 'sof-firmware')
 install=${pkgname}.install
 source=(61-sensor-local.hwdb
 	70-wifi-pm.rules
