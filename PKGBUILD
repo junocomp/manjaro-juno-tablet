@@ -22,10 +22,11 @@ source=(61-sensor-local.hwdb
 	powertop.rules
 	powertop.service
 	replace-hifi
+	restore-alsa
 	resume
 	squeekboard.rules
 	systemd.hook)
-sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
+sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
 package () {
   # Create folders
   mkdir -p $pkgdir/etc/udev/hwdb.d/
@@ -63,6 +64,7 @@ package () {
   cp replace-hifi $pkgdir/usr/share/juno/
   chmod a+x $pkgdir/usr/share/juno/replace-hifi
   cp alsa-ucm-conf.hook $pkgdir/etc/pacman.d/hooks
+  cp restore-alsa $pkgdir/usr/bin
   
   # Mozilla Wayland settings
   cp juno-profile.sh $pkgdir/etc/profile.d/
