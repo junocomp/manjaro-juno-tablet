@@ -66,6 +66,7 @@ package () {
   chmod a+x $pkgdir/usr/share/juno/replace-hifi
   cp alsa-ucm-conf.hook $pkgdir/etc/pacman.d/hooks
   cp restore-alsa $pkgdir/usr/bin
+  chmod a+x $pkgdir/usr/bin/restore-alsa
   
   # Mozilla Wayland settings
   cp juno-profile.sh $pkgdir/etc/profile.d/
