@@ -38,6 +38,7 @@ package () {
   mkdir -p $pkgdir/etc/pacman.d/hooks
   mkdir -p $pkgdir/etc/profile.d/
   mkdir -p $pkgdir/etc/pulse/default.pa.d/
+  mkdir -p $pkgdir/usr/bin
   
   # Rules and HWDB
   cp 61-sensor-local.hwdb $pkgdir/etc/udev/hwdb.d/
