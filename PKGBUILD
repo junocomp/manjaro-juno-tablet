@@ -1,13 +1,14 @@
 # Maintainer: Giovanni Caligaris <uk@junocomputers.com>
 pkgname=juno-tablet
 pkgver=0.1.0
-pkgrel=3
+pkgrel=4
 pkgdesc="Manjaro Drivers for Juno Tablet"
 arch=(any)
 license=('GPL3')
-depends=('flatpak' 'plocate' 'firefox' 'sof-firmware' 'thermald' 'irqbalance' 'curl' 'sof-firmware' 'mobile-config-firefox' 'powertop')
+depends=('flatpak' 'plocate' 'firefox' 'sof-firmware' 'thermald' 'irqbalance' 'curl' 'sof-firmware' 'mobile-config-firefox' 'powertop' 'iio-sensor-proxy')
 install=${pkgname}.install
-source=(61-sensor-local.hwdb
+source=(10_juno-debian-settings.gschema.override
+	61-sensor-local.hwdb
 	70-wifi-pm.rules
 	99-inverted-touchscreen.rules
 	alsa-ucm-conf.hook
@@ -26,7 +27,7 @@ source=(61-sensor-local.hwdb
 	resume
 	squeekboard.rules
 	systemd.hook)
-sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
+sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
 package () {
   # Create folders
   mkdir -p $pkgdir/etc/udev/hwdb.d/
@@ -39,6 +40,7 @@ package () {
   mkdir -p $pkgdir/etc/profile.d/
   mkdir -p $pkgdir/etc/pulse/default.pa.d/
   mkdir -p $pkgdir/usr/bin
+  mkdir -p $pkgdir/usr/share/glib-2.0/schemas/
   
   # Rules and HWDB
   cp 61-sensor-local.hwdb $pkgdir/etc/udev/hwdb.d/
@@ -70,5 +72,8 @@ package () {
   
   # Mozilla Wayland settings
   cp juno-profile.sh $pkgdir/etc/profile.d/
+  
+  # Schemas
+  cp 10_juno-debian-settings.gschema.override $pkgdir/usr/share/glib-2.0/schemas/
 
   }
