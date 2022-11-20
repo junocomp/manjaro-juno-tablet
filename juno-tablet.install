@@ -25,6 +25,7 @@ post_install() {
 	rm /usr/share/alsa/ucm2/Intel/sof-essx8336/HiFi.conf
 	cp /usr/share/juno/HiFi.conf /usr/share/alsa/ucm2/Intel/sof-essx8336/HiFi.conf
 	updatedb
+	glib-compile-schemas /usr/share/glib-2.0/schemas/
 }
 
 ## arg 1:  the new package version
