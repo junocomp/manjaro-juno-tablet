@@ -15,3 +15,7 @@ Manjaro drivers for Juno Tablet
 Requires ```kernel 6.1``` otherwise sound will not work after ```Hibernate```.
 
 ```sudo pacman -S linux61```
+
+####################
+
+<a href="https://junocomputers.com">https://junocomputers.com</a>
