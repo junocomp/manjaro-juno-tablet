@@ -1,6 +1,8 @@
 # manjaro-juno-tablet
 Manjaro drivers for Juno Tablet
 
+A ```SWAP partition``` (not file) is required to be created when installing Manjaro, otherwise suspend-to-hibernate will not work.
+
 ## Compile Manually
 
 ```sudo pacman -S make```
