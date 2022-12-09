@@ -5,7 +5,7 @@ pkgrel=4
 pkgdesc="Manjaro Drivers for Juno Tablet"
 arch=(any)
 license=('GPL3')
-depends=('flatpak' 'plocate' 'firefox' 'sof-firmware' 'thermald' 'irqbalance' 'curl' 'sof-firmware' 'mobile-config-firefox' 'powertop' 'iio-sensor-proxy')
+depends=('flatpak' 'plocate' 'firefox' 'sof-firmware' 'thermald' 'irqbalance' 'curl' 'sof-firmware' 'mobile-config-firefox' 'powertop' 'iio-sensor-proxy' 'python-gobject' 'power-profiles-daemon')
 install=${pkgname}.install
 source=(10_juno-debian-settings.gschema.override
 	61-sensor-local.hwdb
@@ -16,6 +16,8 @@ source=(10_juno-debian-settings.gschema.override
 	HiFi.conf
 	juno.pa
 	juno-login.conf
+	juno-pp
+	juno-pp.service
 	juno-profile.sh
 	juno-sleep.conf
 	juno-suspend
@@ -27,7 +29,7 @@ source=(10_juno-debian-settings.gschema.override
 	resume
 	squeekboard.rules
 	systemd.hook)
-sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
+sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
 package () {
   # Create folders
   mkdir -p $pkgdir/etc/udev/hwdb.d/
@@ -60,6 +62,9 @@ package () {
   chmod a+x $pkgdir/usr/share/juno/resume
   cp systemd.hook $pkgdir/etc/pacman.d/hooks
   cp powertop.service $pkgdir/etc/systemd/system/
+  cp juno-pp.service $pkgdir/etc/systemd/system/
+  cp juno-pp $pkgdir/usr/bin
+  chmod a+x $pkgdir/usr/bin/juno-pp
   
   # SOF-Firmware
   cp HiFi.conf $pkgdir/usr/share/juno
