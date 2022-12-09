@@ -20,6 +20,10 @@ post_install() {
 	systemctl enable powertop
 	systemctl enable sshd
 	systemctl start sshd
+	systemctl enable power-profiles-daemon
+	systemctl start power-profiles-daemon
+	systemctl enable juno-pp
+	systemctl start juno-pp
 	rm /usr/lib/systemd/system/systemd-suspend.service
 	ln -s /usr/lib/systemd/system/systemd-suspend-then-hibernate.service /usr/lib/systemd/system/systemd-suspend.service
 	rm /usr/share/alsa/ucm2/Intel/sof-essx8336/HiFi.conf
