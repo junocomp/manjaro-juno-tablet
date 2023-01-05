@@ -13,7 +13,7 @@ post_install() {
 	systemd-hwdb update
 	udevadm trigger -v -p DEVNAME=/dev/iio:device0
 	sed -i -e '/GRUB_CMDLINE_LINUX_DEFAULT/d' /etc/default/grub
-	sed -i '/\GRUB_DISTRIBUTOR/a GRUB_CMDLINE_LINUX_DEFAULT="quiet splash mem_sleep_default=s2idle resume=/dev/$(/usr/share/juno/resume)"' /etc/default/grub
+	sed -i '/\GRUB_DISTRIBUTOR/a GRUB_CMDLINE_LINUX_DEFAULT="quiet splash resume=/dev/$(/usr/share/juno/resume)"' /etc/default/grub
 	update-grub
 	systemctl enable thermald
 	systemctl enable irqbalance
