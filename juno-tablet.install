@@ -18,6 +18,7 @@ post_install() {
 	systemctl enable thermald
 	systemctl enable irqbalance
 	systemctl enable powertop
+	systemctl enable powertop-usb-mouse
 	systemctl enable sshd
 	systemctl start sshd
 	systemctl enable power-profiles-daemon
