@@ -1,7 +1,7 @@
 # Maintainer: Giovanni Caligaris <uk@junocomputers.com>
 pkgname=juno-tablet
 pkgver=0.1.0
-pkgrel=7
+pkgrel=8
 pkgdesc="Manjaro Drivers for Juno Tablet"
 arch=(any)
 license=('GPL3')
@@ -16,11 +16,13 @@ source=(10_juno-debian-settings.gschema.override
 	HiFi.conf
 	juno.pa
 	juno-login.conf
+	juno-monitor
 	juno-pp
 	juno-pp.service
 	juno-profile.sh
 	juno-sleep.conf
 	juno-suspend
+	juno-turbo.rules
 	power-profiles.rules
 	powertop.rules
 	powertop.service
@@ -30,8 +32,11 @@ source=(10_juno-debian-settings.gschema.override
 	restore-alsa
 	resume
 	squeekboard.rules
-	systemd.hook)
-sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
+	systemd.hook
+	turbo-off
+	turbo-on
+	turbo-stat)
+sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
 package () {
   # Create folders
   mkdir -p $pkgdir/etc/udev/hwdb.d/
@@ -54,6 +59,7 @@ package () {
   cp powertop.rules $pkgdir/etc/udev/rules.d/
   cp external-display-power-profile.rules $pkgdir/etc/udev/rules.d/
   cp squeekboard.rules $pkgdir/etc/udev/rules.d/
+  cp juno-turbo.rules $pkgdir/etc/udev/rules.d/
     
   #Systemd
   cp juno-login.conf $pkgdir/etc/systemd/logind.conf.d/
@@ -85,5 +91,15 @@ package () {
   
   # Schemas
   cp 10_juno-debian-settings.gschema.override $pkgdir/usr/share/glib-2.0/schemas/
+  
+  # Turbo
+  cp turbo-off $pkgdir/usr/bin
+  cp turbo-on $pkgdir/usr/bin
+  cp turbo-stat $pkgdir/usr/bin
+  cp juno-monitor $pkgdir/usr/bin
+  chmod a+x $pkgdir/usr/bin/turbo-off
+  chmod a+x $pkgdir/usr/bin/turbo-on
+  chmod a+x $pkgdir/usr/bin/turbo-stat
+  chmod a+x $pkgdir/usr/bin/juno-monitor
 
   }
