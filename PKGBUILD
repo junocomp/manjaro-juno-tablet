@@ -1,7 +1,7 @@
 # Maintainer: Giovanni Caligaris <uk@junocomputers.com>
 pkgname=juno-tablet
 pkgver=0.1.0
-pkgrel=8
+pkgrel=9
 pkgdesc="Manjaro Drivers for Juno Tablet"
 arch=(any)
 license=('GPL3')
@@ -23,20 +23,21 @@ source=(10_juno-debian-settings.gschema.override
 	juno-sleep.conf
 	juno-suspend
 	juno-turbo.rules
+	override.conf
 	power-profiles.rules
 	powertop.rules
 	powertop.service
 	powertop-usb-mouse
-	powertop-usb-mouse.service
 	replace-hifi
 	restore-alsa
 	resume
 	squeekboard.rules
 	systemd.hook
+	terminal-clean
 	turbo-off
 	turbo-on
 	turbo-stat)
-sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
+sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
 package () {
   # Create folders
   mkdir -p $pkgdir/etc/udev/hwdb.d/
@@ -50,6 +51,7 @@ package () {
   mkdir -p $pkgdir/etc/pulse/default.pa.d/
   mkdir -p $pkgdir/usr/bin
   mkdir -p $pkgdir/usr/share/glib-2.0/schemas/
+  mkdir -p $pkgdir/etc/systemd/system/powertop.service.d
   
   # Rules and HWDB
   cp 61-sensor-local.hwdb $pkgdir/etc/udev/hwdb.d/
@@ -72,10 +74,10 @@ package () {
   cp powertop.service $pkgdir/etc/systemd/system/
   cp powertop-usb-mouse $pkgdir/usr/bin
   chmod a+x $pkgdir/usr/bin/powertop-usb-mouse
-  cp powertop-usb-mouse.service $pkgdir/etc/systemd/system/
   cp juno-pp.service $pkgdir/etc/systemd/system/
   cp juno-pp $pkgdir/usr/bin
   chmod a+x $pkgdir/usr/bin/juno-pp
+  cp override.conf $pkgdir/etc/systemd/system/powertop.service.d
   
   # SOF-Firmware
   cp HiFi.conf $pkgdir/usr/share/juno
@@ -101,5 +103,8 @@ package () {
   chmod a+x $pkgdir/usr/bin/turbo-on
   chmod a+x $pkgdir/usr/bin/turbo-stat
   chmod a+x $pkgdir/usr/bin/juno-monitor
+  
+  # Terminal Clean
+  cp terminal-clean $pkgdir/usr/bin
 
   }
