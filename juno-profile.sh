@@ -1,4 +1,2 @@
-# Enable Wayland for Firefox
-if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
-    export MOZ_ENABLE_WAYLAND=1
-fi
+export MOZ_ENABLE_WAYLAND=1
+export QT_QPA_PLATFORM=wayland
