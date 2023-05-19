@@ -10,8 +10,6 @@
 ## arg 1:  the new package version
 post_install() {
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo     
-	systemd-hwdb update
-	udevadm trigger -v -p DEVNAME=/dev/iio:device0
 	sed -i -e '/GRUB_CMDLINE_LINUX_DEFAULT/d' /etc/default/grub
 	sed -i '/\GRUB_DISTRIBUTOR/a GRUB_CMDLINE_LINUX_DEFAULT="quiet splash resume=/dev/$(/usr/share/juno/resume)"' /etc/default/grub
 	update-grub

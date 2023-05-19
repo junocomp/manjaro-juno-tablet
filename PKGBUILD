@@ -1,16 +1,14 @@
 # Maintainer: Giovanni Caligaris <uk@junocomputers.com>
 pkgname=juno-tablet
 pkgver=0.1.0
-pkgrel=10
+pkgrel=11
 pkgdesc="Manjaro Drivers for Juno Tablet"
 arch=(any)
 license=('GPL3')
 depends=('flatpak' 'plocate' 'firefox' 'sof-firmware' 'thermald' 'irqbalance' 'curl' 'sof-firmware' 'mobile-config-firefox' 'powertop' 'iio-sensor-proxy' 'python-gobject' 'power-profiles-daemon' 'acpi')
 install=${pkgname}.install
 source=(10_juno-debian-settings.gschema.override
-	61-sensor-local.hwdb
 	70-wifi-pm.rules
-	99-inverted-touchscreen.rules
 	alsa-ucm-conf.hook
 	external-display-power-profile.rules
 	HiFi.conf
@@ -37,10 +35,9 @@ source=(10_juno-debian-settings.gschema.override
 	turbo-off
 	turbo-on
 	turbo-stat)
-sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
+sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
 package () {
   # Create folders
-  mkdir -p $pkgdir/etc/udev/hwdb.d/
   mkdir -p $pkgdir/etc/udev/rules.d/
   mkdir -p $pkgdir/etc/systemd/system/
   mkdir -p $pkgdir/etc/systemd/logind.conf.d
@@ -54,9 +51,7 @@ package () {
   mkdir -p $pkgdir/etc/systemd/system/powertop.service.d
   
   # Rules and HWDB
-  cp 61-sensor-local.hwdb $pkgdir/etc/udev/hwdb.d/
   cp 70-wifi-pm.rules $pkgdir/etc/udev/rules.d/
-  cp 99-inverted-touchscreen.rules $pkgdir/etc/udev/rules.d/
   cp power-profiles.rules $pkgdir/etc/udev/rules.d/
   cp powertop.rules $pkgdir/etc/udev/rules.d/
   cp external-display-power-profile.rules $pkgdir/etc/udev/rules.d/
