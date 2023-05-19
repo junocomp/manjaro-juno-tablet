@@ -1,7 +1,7 @@
 # manjaro-juno-tablet
 Manjaro drivers for Juno Tablet
 
-A ```SWAP partition``` (not file) is required to be created when installing Manjaro, otherwise ```hibernate``` will not work.
+A ```SWAP partition``` (not file) is required to be created when installing Manjaro, otherwise ```suspend-then-hibernate``` will not work.
 
 ## Compile Manually
 
@@ -14,7 +14,7 @@ A ```SWAP partition``` (not file) is required to be created when installing Manj
 ```sudo pacman -S juno-tablet```
 
 ## Kernel 6.1
-Requires ```kernel 6.1``` otherwise sound will not work after ```Hibernate```.
+Requires ```kernel 6.1```.
 
 ```sudo pacman -S linux61```
 
