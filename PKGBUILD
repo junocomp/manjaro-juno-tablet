@@ -1,13 +1,14 @@
 # Maintainer: Giovanni Caligaris <uk@junocomputers.com>
 pkgname=juno-tablet
-pkgver=0.1.0
-pkgrel=11
+pkgver=0.1.2
+pkgrel=1
 pkgdesc="Manjaro Drivers for Juno Tablet"
 arch=(any)
 license=('GPL3')
-depends=('flatpak' 'plocate' 'firefox' 'sof-firmware' 'thermald' 'irqbalance' 'curl' 'sof-firmware' 'mobile-config-firefox' 'powertop' 'iio-sensor-proxy' 'python-gobject' 'power-profiles-daemon' 'acpi')
+depends=('flatpak' 'plocate' 'firefox' 'sof-firmware' 'thermald' 'irqbalance' 'curl' 'sof-firmware' 'mobile-config-firefox' 'powertop' 'iio-sensor-proxy' 'python-gobject' 'power-profiles-daemon' 'acpi' 'gst-plugin-pipewire' 'gst-plugin-libcamera' 'pipewire-v4l2)
 install=${pkgname}.install
 source=(10_juno-debian-settings.gschema.override
+	61-sensor-local.hwdb
 	70-wifi-pm.rules
 	alsa-ucm-conf.hook
 	external-display-power-profile.rules
@@ -35,10 +36,11 @@ source=(10_juno-debian-settings.gschema.override
 	turbo-off
 	turbo-on
 	turbo-stat)
-sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
+sha256sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
 package () {
   # Create folders
   mkdir -p $pkgdir/etc/udev/rules.d/
+  mkdir -p $pkgdir/etc/udev/hwdb.d/
   mkdir -p $pkgdir/etc/systemd/system/
   mkdir -p $pkgdir/etc/systemd/logind.conf.d
   mkdir -p $pkgdir/etc/systemd/sleep.conf.d
@@ -57,6 +59,7 @@ package () {
   cp external-display-power-profile.rules $pkgdir/etc/udev/rules.d/
   cp squeekboard.rules $pkgdir/etc/udev/rules.d/
   cp juno-turbo.rules $pkgdir/etc/udev/rules.d/
+  cp 61-sensor-local.hwdb $pkgdir/etc/udev/hwdb.d/
     
   #Systemd
   cp juno-login.conf $pkgdir/etc/systemd/logind.conf.d/
