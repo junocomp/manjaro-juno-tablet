@@ -5,7 +5,7 @@ pkgrel=2
 pkgdesc="Manjaro Drivers for Juno Tablet"
 arch=(any)
 license=('GPL3')
-depends=('flatpak' 'plocate' 'firefox' 'sof-firmware' 'thermald' 'irqbalance' 'curl' 'sof-firmware' 'mobile-config-firefox' 'powertop' 'iio-sensor-proxy' 'python-gobject' 'power-profiles-daemon' 'acpi' 'gst-plugin-pipewire' 'gst-plugin-libcamera' 'pipewire-v4l2')
+depends=('flatpak' 'plocate' 'firefox' 'sof-firmware' 'thermald' 'irqbalance' 'curl' 'sof-firmware' 'mobile-config-firefox' 'powertop' 'iio-sensor-proxy' 'python-gobject' 'power-profiles-daemon' 'acpi' 'gst-plugin-pipewire' 'gst-plugin-libcamera' 'pipewire-v4l2' 'iw')
 install=${pkgname}.install
 source=('10_juno-debian-settings.gschema.override'
 		'61-sensor-local.hwdb'
