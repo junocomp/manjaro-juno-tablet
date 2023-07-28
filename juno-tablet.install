@@ -11,7 +11,7 @@
 post_install() {
 	flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo     
 	sed -i -e '/GRUB_CMDLINE_LINUX_DEFAULT/d' /etc/default/grub
-	sed -i '/\GRUB_DISTRIBUTOR/a GRUB_CMDLINE_LINUX_DEFAULT="quiet splash resume=/dev/$(/usr/share/juno/resume)"' /etc/default/grub
+	sed -i '/\GRUB_DISTRIBUTOR/a GRUB_CMDLINE_LINUX_DEFAULT="quiet splash resume=/dev/$(/usr/share/juno/resume) pcie_port_pm=off i8042.nopnp"' /etc/default/grub
 	update-grub
 	systemctl enable thermald
 	systemctl enable irqbalance
