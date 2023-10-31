@@ -13,11 +13,4 @@ A ```SWAP partition``` (not file) is required to be created when installing Manj
 
 ```sudo pacman -S juno-tablet```
 
-## Kernel 6.1
-Requires ```kernel 6.1```.
-
-```sudo pacman -S linux61```
-
-####################
-
 <a href="https://junocomputers.com">https://junocomputers.com</a>
