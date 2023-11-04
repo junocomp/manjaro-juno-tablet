@@ -1,7 +1,7 @@
 # Maintainer: Giovanni Caligaris <uk@junocomputers.com>
 pkgname=juno-tablet
 pkgver=0.2.0
-pkgrel=2
+pkgrel=3
 pkgdesc="Manjaro Drivers for Juno Tablet"
 arch=(any)
 license=('GPL3')
